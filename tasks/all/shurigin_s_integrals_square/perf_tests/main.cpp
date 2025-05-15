@@ -12,6 +12,7 @@
 #include <chrono>
 #include <cmath>
 #include <cstdint>
+#include <iostream>
 #include <memory>
 #include <numeric>
 #include <stdexcept>
@@ -53,11 +54,13 @@ TEST(shurigin_s_integrals_square_mpi, test_pipeline_run) {
   inputs_data.push_back(up_limit_y);
   inputs_data.push_back(static_cast<double>(count_x));
   inputs_data.push_back(static_cast<double>(count_y));
+
   if (inputs_data.size() != static_cast<size_t>(3 * dimensions)) {
     if (rank == 0) {
-      std::cerr << "Error: Prepared inputs_data size mismatch!\n";
+      std::cerr << "Error in test setup: Prepared inputs_data size mismatch!\n";
+      std::cerr << "Expected size: " << (3 * dimensions) << ", Actual size: " << inputs_data.size() << "\n";
     }
-    FAIL() << "Prepared inputs_data size mismatch!";
+    FAIL() << "Test setup failed: Prepared inputs_data size mismatch.";
   }
 
   std::vector<double> result_vec(1, 0.0);
@@ -117,11 +120,13 @@ TEST(shurigin_s_integrals_square_mpi, test_task_run) {
   inputs_data.push_back(up_limit_y);
   inputs_data.push_back(static_cast<double>(count_x));
   inputs_data.push_back(static_cast<double>(count_y));
+
   if (inputs_data.size() != static_cast<size_t>(3 * dimensions)) {
     if (rank == 0) {
-      std::cerr << "Error: Prepared inputs_data size mismatch!\n";
+      std::cerr << "Error in test setup: Prepared inputs_data size mismatch!\n";
+      std::cerr << "Expected size: " << (3 * dimensions) << ", Actual size: " << inputs_data.size() << "\n";
     }
-    FAIL() << "Prepared inputs_data size mismatch!";
+    FAIL() << "Test setup failed: Prepared inputs_data size mismatch.";
   }
 
   std::vector<double> result_vec(1, 0.0);
